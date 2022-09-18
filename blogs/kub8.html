@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kuberneties</title>
+    <link rel="stylesheet" href="/style/styles.css">
+</head>
+<body>
+    <nav class="navigation container">
+        <div class="nav-brand">I'm Shrey</div>
+    <ul class="list-non-bullet nav-pills">
+        <li class = "list-item-inline" ><a href="/index.html" class="link link-active">About</a></li>
+        <li class = "nav-pills list-item-inline" ><a href="/projects.html" class="link">Projects</a></li>
+        <li class = "nav-pills  list-item-inline" ><a href="/blogs.html" class="link">Blogs</a></li>
+    </ul>
+    </nav>
+    <header class="container hero">
+        <h2 class = "hero-heading">Hey this is a draft on my understanding of <span class="heading-inverted">Kuberneties :)</span></h2>
+    </header>
+    <article class="container-center showcase-blog">
+        <p>
+            <strong>Container orchestration service </strong>
+            <ul>
+            <li> High availability</li>
+            <li> Disaster recovery </li>        
+            <li> High Scalability </li>
+            </ul>
+            <strong>K8 CLUSTER > NODE > POD > CONTAINER</strong>
+        </p>
+  
+        <h2>Terms</h2>
+        <p> 
+            <ol>
+                <li>Services and Ingress</li>
+            Generally each pod has its own container running on K8
+            All pods have their own IP add and every time a pod is down and restarted a new add is assigned so SERVICE is use which is associated with every pod and has a permanent IP address and is also a load balancer multiple replicas of pods are connected to the same service. Services are external and internal which allows interaction similarly, I.e db pods have internal service and UI pods have external service, but Ingress is used for customer facing since external service have url like http://Ip:port which basically forwards to service so it is Ingress -> external service (so INGRESS—>SERVICE—>CONTAINER)
+            
+            
+            <li>Config Map </li>
+            Contains url of different services like db, I.e external config to ur application (content of application.properties)
+            
+            <li>Secret</li>
+            Username passwords are stored in base64 encoded format 
+            
+            <li>Volumes</li>
+            Are the DB, attaches a physical storage on a local machine where the pod is running or external database like cloud which is not part of the K8 cluster. 
+            
+            <li>Deployment and StateFull sets</li>
+            Which mentioned the number of replicas of the pods to run , but we can’t replicate DB pods using deployment since it is stateful and W/R operations may cause data inconsistency in the DB. We need something to mange that is stateFull set, so it is used to scale up and down DB application pods and synchronise them so that database inconsistency does not happen. But generally StateFull are tougher to setup hence mostly stateless applications are done deployed in K8 and DB apps are deployed outside the K8 cluster 
+            
+            <li>Nods / Worker nodes </li>
+            Are the actual services which have pods running in them ; There are three services which run 
+            CONTAINER RUNTIME(like docker etc)
+            KUBLET (interface b/t containerRuntime and pods so responsible to start a pod with container inside; assigning resources from the node to that container ) KUBE PROXY (forwards the request from services to pods )
+            
+            <li>Master Nodes</li>
+            API server (cluster gateway which gets initial requests for any updates in the cluster and also authenticates the requests and is load balanced) 
+            Scheduler (starts a new pods in the worker node, it gets the requests from API server and decides on which node the new pod goes it is the Kublet which start the actual pod and receives request from scheduler) 
+            Controller manger (Detects pod crashes and recover the pods and makes a request to Scheduler to start the pod)
+            Etcd (key value store is the brain, any changes gets updated here. Cluster state info for master processes. Forms a distributed storage across all the master node, stores the current status of all K8 components and K8 compares this with deployment (config files) to see if there is a change in the cluster and new pods need to be spin up or not ) 
+            
+            
+            <li>MINIKUBE</li>
+            One node K8 cluster that runs in a virtual box, has master and worker operations on the same node. For local testing on laptop 
+            
+            <li>KUBECTL</li>
+            Command line tool for K8 cluster both miniKube and cloud K8 
+            To talk to Api server we have UI, K8 API, and KUBE-CTL (most powerful)
+            
+            <li>Replicaset </li>
+            Is between Deployment and pod. It manages the replicas of pods, it is managed by deployment. 
+            Deployment > Replicaset > Pod > Container
+            </ol>
+            
+        </p>
+  
+        <h2>
+            HELM <small>Package manger for K8.</small>
+        </h2>
+        <p>
+            Package manger for K8, homebrew for yml files to resume the configuration of yml that someone has already made 
+            Helm charts: bundle of yml files and meta data about them
+            Now it is also used as a templating engine and only certain values can be taken in the helm package from other sources generally from values.yml like how bible does it 
+            Another case is when we want yo deploy the same helm package in different environments QA, prod etc 
+            So value injections form values.yaml to my-values.yaml happen
+            Release Management :- Helm 2 Tiller is used to run in K8 cluster and has the history of helm chart execution. Changes are applied to existing deployment instead of taking a new one . Tiller is super power and thereby has security issues. 
+            Helm 3 No tiller so simple helm binary now 
+            <br>
+            For example, if a topic has three partitions with three brokers in the cluster, each broker has one partition. The published data to partition is append-only with the offset increment. 
+            <ul>
+                K8 Volumes
+                <li> Persistent Volume </li>
+                <li> Persistent Volume Claim</li>
+                <li> Storage Claim</li>
+            </ul>
+        </p>
+      </article>
+
+    <footer class="footer">
+        <div class="footer-header">Stay connected with me on</div>
+           <ul>
+               <li class="list-item-inline"><a class="link " href="https://github.com/Shrey-Tyagi">GitHub</a></li>
+               <li class="list-item-inline"><a class="link " href="https://www.linkedin.com/in/shrey-tyagi">Linkedin</a></li>
+               <li class="list-item-inline"><a class="link " href="https://twitter.com/ShreyyTyagi">Twitter</a></li>
+           </ul>
+    </footer>
+</body>
+</html>

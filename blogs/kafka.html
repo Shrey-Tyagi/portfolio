@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kafka</title>
+    <link rel="stylesheet" href="/style/styles.css">
+</head>
+<body>
+    <nav class="navigation container">
+        <div class="nav-brand">I'm Shrey</div>
+    <ul class="list-non-bullet nav-pills">
+        <li class = "list-item-inline" ><a href="/index.html" class="link link-active">About</a></li>
+        <li class = "nav-pills list-item-inline" ><a href="/projects.html" class="link">Projects</a></li>
+        <li class = "nav-pills  list-item-inline" ><a href="/blogs.html" class="link">Blogs</a></li>
+    </ul>
+    </nav>
+    <header class="container hero">
+        <h2 class = "hero-heading">Hey this is a draft on my understanding of <span class="heading-inverted">Kafka :)</span></h2>
+    </header>
+    <article class="container-center showcase-blog">
+        <p>
+            Apache Kafka is a distributed streaming system that can publish and subscribe to a stream of records. In another aspect, it is an enterprise messaging system. It is a highly fast, horizontally scalable, and fault-tolerant system.
+            Kafka has 4 core APIs
+            <ul>
+            <li> Producer API </li>
+            Allows clients to connect to Kafka servers running in the cluster and publish the stream of records to one or more Kafka topics 
+            <li> Consumer API </li>
+            Allows clients to connect to Kafka servers running in the cluster and consume streams of records from one or more Kafka topics. Kafka consumes the messages from Kafka topics. 
+            <li> Streams API</li>
+            Allows clients to act as stream processors by consuming streams from one or more topics and producing the streams to other output topics. This allows transforming the input and output streams. 
+            <li> Connector API </li>
+            Allows writing reusable producer and consumer code.
+            For example, if we want to read data from any RDBMS to publish the data to the topic and consume data from the topic and write that to RDBMS. We can create reusable source and sink connector components for various data sources.
+            </ul>
+            Apache Kafka uses Apache Zookeeper to maintain and coordinate the Apache Kafka brokers. A version of Apache Zookeeper is bundled with Apache Kafka.             
+        </p>
+  
+        <h2>Use cases</h2>
+        <p>
+            Kafka is used for the below use cases:
+            <ol>
+            <li class="">Messaging System Kafka is used as an enterprise messaging system to decouple source and target systems to exchange data. Kafka provides high throughput with partitions and fault tolerance with replication in comparison to JMS.</li>
+            <li class="">Web Activity Tracking This is done to track user journey events on the website for analytics and offline data processing. </li>
+            <li class="">Log Aggregation This processes the log from various systems, especially in distributed environments with microservices architectures in which the systems are deployed on various hosts. We need to aggregate the logs from various systems and make the logs available in a central place for analysis. </li>
+            <li class="">Metrics Collector Kafka is used to collecting metrics from various systems and networks for operations monitoring. There are Kafka metrics reporters available for monitoring tools like Ganglia, Graphite, etc.</li>
+            </ol>
+            Fault tolerance is the property that enables a system to continue operating properly in the event of the failure of some of its components.The Java Message Service (JMS) API is a messaging standard that allows application components based on the Java Platform Enterprise Edition (Java EE) to create, send, receive, and read messages. It enables distributed communication that is loosely coupled, reliable, and asynchronous.
+        </p>
+  
+        <h2>
+          Broker <small>An instance in a Kafka cluster is called a broker.</small>
+        </h2>
+        <p>
+             In a Kafka cluster, if you connect to a broker, you will be able to access the entire cluster.
+             The broker instance that we connect to in order to access the cluster is known as a bootstrap server.
+             Each broker is identified by a numeric ID in the cluster. 
+             To start a Kafka cluster, three brokers is a good number, but there are clusters with hundreds of brokers. 
+
+             A topic is a logical name to which the records are published. 
+             Internally, the topic is divided into partitions to which the data is published. 
+             These partitions are distributed across the brokers in the cluster. 
+            <br>
+            For example, if a topic has three partitions with three brokers in the cluster, each broker has one partition. The published data to partition is append-only with the offset increment. 
+            <ul>
+                Below are some points we need to remember when working with partitions.
+                <li> Topics are identified by name. We can have many named topics in a cluster. </li>
+                <li> The order of messages is maintained at the partition level, not across topics. </li>
+                <li> Once the data written to the partition, it is not overridden. This is called immutability. </li>
+                <li> The messages in partitions are stored with keys, values, and timestamps. Kafka ensures publishing the message to the same partition for a given key.</li>
+                <li> From the Kafka cluster, each partition will have a leader that will take read/write operations to that partition. </li>
+            </ul>
+        </p>
+      </article>
+    <footer class="footer">
+        <div class="footer-header">Stay connected with me on</div>
+           <ul>
+               <li class="list-item-inline"><a class="link " href="https://github.com/Shrey-Tyagi">GitHub</a></li>
+               <li class="list-item-inline"><a class="link " href="https://www.linkedin.com/in/shrey-tyagi">Linkedin</a></li>
+               <li class="list-item-inline"><a class="link " href="https://twitter.com/ShreyyTyagi">Twitter</a></li>
+           </ul>
+    </footer>
+</body>
+</html>
